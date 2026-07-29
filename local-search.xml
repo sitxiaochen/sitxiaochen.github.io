@@ -4,48 +4,23 @@
   
   
   <entry>
-    <title>Geek</title>
-    <link href="/2024/06/26/Geek/"/>
-    <url>/2024/06/26/Geek/</url>
+    <title>AI 模块上线</title>
+    <link href="/2026/07/28/AI/AI%E6%A8%A1%E5%9D%97%E4%B8%8A%E7%BA%BF/"/>
+    <url>/2026/07/28/AI/AI%E6%A8%A1%E5%9D%97%E4%B8%8A%E7%BA%BF/</url>
     
-    <content type="html"><![CDATA[<h1 id="Geek"><a href="#Geek" class="headerlink" title="Geek"></a>Geek</h1><h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>100% 免费，快捷、高效、小而稳<br>常规卸载与强制卸载<br>支持 x64 位系统<br>简易、快捷，入门无难度<br>可卸载 Windows 商店 APP</p><p>适合简单的卸载需求。<br>官网链接：<a href="https://geekuninstaller.pro/">https://geekuninstaller.pro/</a></p>]]></content>
+    <content type="html"><![CDATA[<p>这里将收录 AI 相关的文章，包括大语言模型、工具使用、部署实践等内容。</p>]]></content>
     
     
     <categories>
       
-      <category>卸载软件工具</category>
+      <category>AI</category>
       
     </categories>
     
     
     <tags>
       
-      <tag>工具</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>Ventoy</title>
-    <link href="/2024/06/26/Ventoy/"/>
-    <url>/2024/06/26/Ventoy/</url>
-    
-    <content type="html"><![CDATA[<h1 id="Ventoy"><a href="#Ventoy" class="headerlink" title="Ventoy"></a>Ventoy</h1><h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>你是不是苦恼于一个镜像系统只能安装在单一的存储空间或者只能通过集成主板类系统来引导和启动镜像。</p><p>Ventoy帮你解决多移动镜像引导的问题，这样你就可以一个U盘多装几个PE或者移动操作系统，比如Win to go。</p><p>官网链接：<a href="https://www.ventoy.net/cn/">https://www.ventoy.net/cn/</a></p>]]></content>
-    
-    
-    <categories>
-      
-      <category>镜像引导工具</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>工具</tag>
+      <tag>AI</tag>
       
     </tags>
     
