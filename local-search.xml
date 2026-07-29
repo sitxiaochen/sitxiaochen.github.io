@@ -28,5 +28,55 @@
   
   
   
+  <entry>
+    <title>Ventoy</title>
+    <link href="/2024/06/26/%E9%95%9C%E5%83%8F%E5%BC%95%E5%AF%BC%E5%B7%A5%E5%85%B7/Ventoy/"/>
+    <url>/2024/06/26/%E9%95%9C%E5%83%8F%E5%BC%95%E5%AF%BC%E5%B7%A5%E5%85%B7/Ventoy/</url>
+    
+    <content type="html"><![CDATA[<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>你是不是苦恼于一个镜像系统只能安装在单一的存储空间或者只能通过集成主板类系统来引导和启动镜像。</p><p>Ventoy 帮你解决多移动镜像引导的问题，这样你就可以一个 U 盘多装几个 PE 或者移动操作系统，比如 Win to go。</p><p>官网链接：<a href="https://www.ventoy.net/cn/">https://www.ventoy.net/cn/</a></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>镜像引导工具</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>工具</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Geek</title>
+    <link href="/2024/06/26/%E5%8D%B8%E8%BD%BD%E8%BD%AF%E4%BB%B6%E5%B7%A5%E5%85%B7/Geek/"/>
+    <url>/2024/06/26/%E5%8D%B8%E8%BD%BD%E8%BD%AF%E4%BB%B6%E5%B7%A5%E5%85%B7/Geek/</url>
+    
+    <content type="html"><![CDATA[<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>100% 免费，快捷、高效、小而稳</p><ul><li>常规卸载与强制卸载</li><li>支持 x64 位系统</li><li>简易、快捷，入门无难度</li><li>可卸载 Windows 商店 APP</li><li>适合简单的卸载需求。</li></ul><p>官网链接：<a href="https://geekuninstaller.pro/">https://geekuninstaller.pro/</a></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>卸载软件工具</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>工具</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
   
 </search>
