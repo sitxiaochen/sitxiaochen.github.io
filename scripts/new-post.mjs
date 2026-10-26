@@ -2,6 +2,8 @@
  * 新建文章脚手架
  * 用法：npm run new -- "文章标题" [分类]
  * 例：  npm run new -- "Docker 常用命令" Linux
+ *
+ * 用 .mjs 而非 .ts：避免依赖 --experimental-strip-types（Node 22/24 行为不一致）
  */
 import { writeFileSync, existsSync, mkdirSync } from 'node:fs';
 import { join } from 'node:path';
@@ -17,7 +19,7 @@ if (!title) {
 }
 
 /** 中文标题转 slug：保留中文字符，空格转连字符 */
-function slugify(input: string): string {
+function slugify(input) {
   return input
     .trim()
     .toLowerCase()

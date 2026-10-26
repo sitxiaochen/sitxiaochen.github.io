@@ -14,10 +14,10 @@
     "preview": "astro preview",
     "astro": "astro",
     "check": "astro check",
-    "db:sync": "node --experimental-strip-types scripts/sync-content.ts",
+    "db:sync": "node scripts/sync-content.mjs",
     "db:push": "drizzle-kit push",
     "search:index": "pagefind --site dist",
-    "new": "node --experimental-strip-types scripts/new-post.ts"
+    "new": "node scripts/new-post.mjs"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
