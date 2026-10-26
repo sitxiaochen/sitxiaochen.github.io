@@ -1,0 +1,56 @@
+backend:
+  name: github
+  repo: sitxiaochen/sitxiaochen.github.io
+  branch: main
+  # GitHub OAuth PKCE：无需 OAuth 代理服务器、无需数据库
+  base_url: https://sitxiaochen.github.io
+  auth_endpoint: auth
+
+# 本地开发时可直接编辑文件（npx @sveltia/cms 或 npm run dev 后访问 /admin/）
+local_backend: false
+
+publish_mode: editorial_workflow
+media_folder: public/images/uploads
+public_folder: /images/uploads
+
+site_url: https://sitxiaochen.github.io
+display_url: https://sitxiaochen.github.io
+logo_url: https://sitxiaochen.github.io/favicon.svg
+locale: zh_Hans
+
+collections:
+  - name: posts
+    label: 文章
+    label_singular: 文章
+    folder: src/content/posts
+    create: true
+    delete: true
+    slug: '{{slug}}'
+    extension: md
+    format: frontmatter
+    identifier_field: title
+    summary: '{{title}} — {{category}}'
+    sortable_fields: [publishedAt, title, category]
+    fields:
+      - { name: title, label: 标题, widget: string, hint: '不超过 120 字' }
+      - {
+          name: description,
+          label: 摘要,
+          widget: text,
+          hint: '用于列表与 SEO，不超过 300 字',
+          pattern: ['^.{1,300}$', '摘要不能超过 300 字'],
+        }
+      - { name: publishedAt, label: 发布日期, widget: datetime, date_format: 'YYYY-MM-DD', time_format: false, picker_utc: true }
+      - { name: updatedAt, label: 更新日期, widget: datetime, date_format: 'YYYY-MM-DD', time_format: false, required: false }
+      - {
+          name: category,
+          label: 分类,
+          widget: select,
+          options: [AI, DevOps, Linux, 云原生, 前端开发, 大语言模型, 开发工具, 卸载软件工具, 镜像引导工具, 杂谈],
+          default: 杂谈,
+        }
+      - { name: tags, label: 标签, widget: list, required: false, default: [], field: { name: tag, label: 标签, widget: string } }
+      - { name: draft, label: 草稿, widget: boolean, default: false }
+      - { name: lang, label: 语言, widget: hidden, default: zh-CN }
+      - { name: cover, label: 封面图, widget: image, required: false }
+      - { name: body, label: 正文, widget: markdown }
