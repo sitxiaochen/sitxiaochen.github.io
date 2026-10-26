@@ -170,15 +170,15 @@ const REDIRECTS = [
   ['/2024/06/26/Ventoy/', '/posts/ventoy/'],
   ['/2024/06/26/卸载软件工具/Geek/', '/posts/geek/'],
   ['/2024/06/26/镜像引导工具/Ventoy/', '/posts/ventoy/'],
-  ['/2026/07/28/AI/AI模块上线/', '/categories/AI/'],
+  ['/2026/07/28/AI/AI模块上线/', '/categories/'],
 ];
+
 for (const [from, to] of REDIRECTS) {
   await client.execute({
     sql: 'INSERT INTO redirects (from_path, to_path) VALUES (?,?) ON CONFLICT(from_path) DO NOTHING',
     args: [from, to],
   });
 }
-
 const tagCount = (await client.execute('SELECT COUNT(*) AS c FROM tags')).rows[0].c;
 console.log(`[db] 已同步 ${count} 篇文章 / ${tagCount} 个标签 -> db/site.db`);
 client.close();
