@@ -1,0 +1,22 @@
+---
+import { SITE } from '@/lib/site';
+const year = new Date().getFullYear();
+---
+
+<footer class="mt-24 border-t border-[var(--color-line)]">
+  <div class="container-page flex flex-col gap-4 py-10 sm:flex-row sm:items-center sm:justify-between">
+    <p class="meta">
+      © {year} {SITE.author} · 用 Astro 构建
+    </p>
+    <nav class="flex items-center gap-5" aria-label="页脚导航">
+      <a href="/rss.xml" class="meta hover:text-[var(--color-ink)]">RSS</a>
+      <a href="/archives/" class="meta hover:text-[var(--color-ink)]">归档</a>
+      <a
+        href={`https://github.com/${SITE.author}`}
+        class="meta hover:text-[var(--color-ink)]"
+        rel="noopener"
+        target="_blank">GitHub</a
+      >
+    </nav>
+  </div>
+</footer>

@@ -1,0 +1,34 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+const posts = await getCollection('posts', ({ data }) => !data.draft);
+const counts = new Map<string, number>();
+for (const p of posts) counts.set(p.data.category, (counts.get(p.data.category) ?? 0) + 1);
+const categories = [...counts.entries()].sort((a, b) => b[1] - a[1]);
+---
+
+<BaseLayout title="分类" description="按分类浏览文章">
+  <section class="container-page pt-14">
+    <h1 class="text-2xl font-semibold tracking-tight">分类</h1>
+    <p class="meta mt-2">共 {categories.length} 个</p>
+
+    <ul class="mt-10 grid gap-px overflow-hidden rounded-lg border border-[var(--color-line)] bg-[var(--color-line)] sm:grid-cols-2">
+      {
+        categories.map(([name, count]) => (
+          <li class="bg-[var(--color-canvas)]">
+            <a
+              href={`/categories/${name}/`}
+              class="card-lift group flex items-center justify-between px-5 py-4"
+            >
+              <span class="text-sm text-[var(--color-ink)] transition-colors group-hover:text-[var(--color-accent)]">
+                {name}
+              </span>
+              <span class="meta tabular-nums">{count}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</BaseLayout>

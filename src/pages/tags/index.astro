@@ -1,0 +1,32 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+const posts = await getCollection('posts', ({ data }) => !data.draft);
+const counts = new Map<string, number>();
+for (const p of posts) for (const t of p.data.tags) counts.set(t, (counts.get(t) ?? 0) + 1);
+const tags = [...counts.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], 'zh'));
+---
+
+<BaseLayout title="标签" description="按标签浏览文章">
+  <section class="container-page pt-14">
+    <h1 class="text-2xl font-semibold tracking-tight">标签</h1>
+    <p class="meta mt-2">共 {tags.length} 个</p>
+
+    <ul class="mt-10 flex flex-wrap gap-2">
+      {
+        tags.map(([name, count]) => (
+          <li>
+            <a
+              href={`/tags/${name}/`}
+              class="inline-flex items-center gap-2 rounded-md border border-[var(--color-line)] px-3 py-1.5 text-sm text-[var(--color-ink-soft)] transition-colors hover:border-[var(--color-line-strong)] hover:text-[var(--color-ink)]"
+            >
+              <span>#{name}</span>
+              <span class="meta tabular-nums">{count}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</BaseLayout>

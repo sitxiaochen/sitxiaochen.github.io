@@ -1,0 +1,37 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { SITE } from '@/lib/site';
+
+/**
+ * 旧 URL 兼容跳转页。
+ *
+ * GitHub Pages 无法下发真正的 HTTP 301，因此在旧地址上生成静态跳转页：
+ * meta refresh（立即跳转）+ canonical（传递权重）+ 可见链接（兜底）。
+ *
+ * 由 redirects 表（scripts/sync-content.ts 写入 db/site.db）驱动。
+ */
+interface Props {
+  to: string;
+}
+
+const { to } = Astro.props;
+const target = new URL(to, SITE.url).href;
+---
+
+<BaseLayout title="页面已迁移" description={`此页面已移动到 ${target}`} noindex={true}>
+  <Fragment slot="head">
+    <meta http-equiv="refresh" content={`0; url=${to}`} />
+  </Fragment>
+
+  <article class="container-page flex min-h-[45vh] flex-col justify-center py-20">
+    <p class="meta">301 · 地址已更新</p>
+    <h1 class="mt-3 text-2xl font-semibold tracking-tight">页面已迁移</h1>
+    <p class="mt-3 max-w-md text-[var(--color-ink-soft)]">
+      旧地址的内容现在位于
+      <a href={to} class="text-[var(--color-accent)] underline underline-offset-4">{target}</a>。
+    </p>
+    <p class="meta mt-6">
+      未自动跳转？<a href={to} class="hover:text-[var(--color-ink)]">点此继续 →</a>
+    </p>
+  </article>
+</BaseLayout>

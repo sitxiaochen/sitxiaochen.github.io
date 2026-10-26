@@ -1,0 +1,44 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PostCard from '@/components/PostCard.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts', ({ data }) => !data.draft);
+  const names = [...new Set(posts.map((p) => p.data.category))];
+  return names.map((name) => ({
+    params: { category: name },
+    props: {
+      name,
+      posts: posts
+        .filter((p) => p.data.category === name)
+        .sort((a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime()),
+    },
+  }));
+}
+
+const { name, posts } = Astro.props;
+---
+
+<BaseLayout title={`分类：${name}`} description={`分类「${name}」下的全部文章`}>
+  <section class="container-page pt-14">
+    <p class="meta"><a href="/categories/" class="hover:text-[var(--color-accent)]">分类</a> /</p>
+    <h1 class="mt-2 text-2xl font-semibold tracking-tight">{name}</h1>
+    <p class="meta mt-2">{posts.length} 篇</p>
+
+    <div class="mt-8">
+      {
+        posts.map((p) => (
+          <PostCard
+            slug={p.id}
+            title={p.data.title}
+            description={p.data.description}
+            publishedAt={p.data.publishedAt}
+            category={p.data.category}
+            tags={p.data.tags}
+          />
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>

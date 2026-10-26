@@ -1,0 +1,171 @@
+@import 'tailwindcss';
+@plugin '@tailwindcss/typography';
+
+/* ============================================================
+   设计语言：极简技术风 · 暗色优先
+   - 中性灰阶为主，单一强调色
+   - 等宽字体用于元信息与代码，正文用无衬线/宋体回退
+   - 细边框、克制的动效
+   ============================================================ */
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans:
+    'Inter var', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC',
+    'Hiragino Sans GB', 'Microsoft YaHei', 'Source Han Sans SC', sans-serif;
+  --font-mono:
+    'JetBrains Mono', ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+
+  /* 语义色：暗色为默认 */
+  --color-canvas: #0b0d10;
+  --color-surface: #121519;
+  --color-elevated: #171b21;
+  --color-line: #232a33;
+  --color-line-strong: #323b47;
+  --color-ink: #e6edf3;
+  --color-ink-soft: #9aa7b4;
+  --color-ink-faint: #6b7784;
+  --color-accent: #4ade80;
+  --color-accent-dim: #1f6f43;
+}
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+  :root.light {
+    color-scheme: light;
+    --color-canvas: #fbfbfa;
+    --color-surface: #ffffff;
+    --color-elevated: #f4f5f4;
+    --color-line: #e5e7e5;
+    --color-line-strong: #d3d7d3;
+    --color-ink: #14181c;
+    --color-ink-soft: #4a5560;
+    --color-ink-faint: #7b8794;
+    --color-accent: #16a34a;
+    --color-accent-dim: #bbf7d0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+  body {
+    background-color: var(--color-canvas);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  ::selection {
+    background: var(--color-accent-dim);
+    color: var(--color-ink);
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+}
+
+@layer components {
+  .container-page {
+    width: 100%;
+    max-width: 68rem;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+
+  .meta {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.02em;
+    color: var(--color-ink-faint);
+  }
+
+  .rule {
+    border-top: 1px solid var(--color-line);
+  }
+
+  /* 文章正文排版 */
+  .prose-blog {
+    --tw-prose-body: var(--color-ink);
+    --tw-prose-headings: var(--color-ink);
+    --tw-prose-links: var(--color-accent);
+    --tw-prose-bold: var(--color-ink);
+    --tw-prose-quotes: var(--color-ink-soft);
+    --tw-prose-quote-borders: var(--color-line-strong);
+    --tw-prose-code: var(--color-ink);
+    --tw-prose-hr: var(--color-line);
+    --tw-prose-th-borders: var(--color-line-strong);
+    --tw-prose-td-borders: var(--color-line);
+    --tw-prose-captions: var(--color-ink-faint);
+    max-width: 46rem;
+  }
+  .prose-blog :where(h2, h3) {
+    scroll-margin-top: 6rem;
+  }
+  .prose-blog :where(h2) {
+    margin-top: 2.75em;
+    padding-top: 1.25em;
+    border-top: 1px solid var(--color-line);
+    font-size: 1.375rem;
+    letter-spacing: -0.01em;
+  }
+  .prose-blog :where(code):not(pre code) {
+    background: var(--color-elevated);
+    border: 1px solid var(--color-line);
+    border-radius: 4px;
+    padding: 0.1em 0.35em;
+    font-size: 0.875em;
+    font-weight: 400;
+  }
+  .prose-blog :where(code):not(pre code)::before,
+  .prose-blog :where(code):not(pre code)::after {
+    content: '';
+  }
+  .prose-blog :where(pre) {
+    background: var(--color-surface) !important;
+    border: 1px solid var(--color-line);
+    border-radius: 8px;
+    font-size: 0.8125rem;
+  }
+  .prose-blog :where(a) {
+    text-decoration: underline;
+    text-decoration-color: color-mix(in oklab, var(--color-accent) 40%, transparent);
+    text-underline-offset: 3px;
+    transition: text-decoration-color 0.15s;
+  }
+  .prose-blog :where(a:hover) {
+    text-decoration-color: var(--color-accent);
+  }
+
+  /* 链接卡片的悬停位移 */
+  .card-lift {
+    transition:
+      border-color 0.18s ease,
+      transform 0.18s ease;
+  }
+  .card-lift:hover {
+    border-color: var(--color-line-strong);
+    transform: translateY(-1px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

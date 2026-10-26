@@ -1,0 +1,56 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { formatDate } from '@/lib/site';
+
+const posts = (await getCollection('posts', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime(),
+);
+
+// 按年份分组
+const byYear = new Map<number, typeof posts>();
+for (const p of posts) {
+  const y = p.data.publishedAt.getUTCFullYear();
+  if (!byYear.has(y)) byYear.set(y, []);
+  byYear.get(y)!.push(p);
+}
+const years = [...byYear.keys()].sort((a, b) => b - a);
+---
+
+<BaseLayout title="归档" description="按时间浏览全部文章">
+  <section class="container-page pt-14">
+    <h1 class="text-2xl font-semibold tracking-tight">归档</h1>
+    <p class="meta mt-2">共 {posts.length} 篇</p>
+
+    <div class="mt-10 space-y-12">
+      {
+        years.map((year) => (
+          <section>
+            <h2 class="meta mb-1 border-b border-[var(--color-line)] pb-2 uppercase tracking-widest">
+              {year}
+              <span class="ml-2 normal-case">({byYear.get(year)!.length})</span>
+            </h2>
+            <ul>
+              {byYear.get(year)!.map((p) => (
+                <li class="border-b border-[var(--color-line)] last:border-0">
+                  <a
+                    href={`/posts/${p.id}/`}
+                    class="group flex items-baseline gap-4 px-1 py-3 transition-colors hover:bg-[var(--color-surface)]"
+                  >
+                    <time class="meta shrink-0 tabular-nums" datetime={p.data.publishedAt.toISOString()}>
+                      {formatDate(p.data.publishedAt).slice(5)}
+                    </time>
+                    <span class="text-sm text-[var(--color-ink)] transition-colors group-hover:text-[var(--color-accent)]">
+                      {p.data.title}
+                    </span>
+                    <span class="meta ml-auto hidden shrink-0 sm:block">{p.data.category}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>

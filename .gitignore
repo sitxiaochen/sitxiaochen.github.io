@@ -1,0 +1,32 @@
+# build output
+dist/
+.astro/
+node_modules/
+
+# 构建期生成的 SQLite 快照（每次 build 由 scripts/sync-content.ts 重建）
+db/site.db
+db/site.db-journal
+db/site.db-wal
+db/site.db-shm
+
+# 本地预览截图
+.preview-shots/
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# env
+.env
+.env.production
+.env.local
+
+# editor / OS
+.DS_Store
+Thumbs.db
+*.swp
+
+# jetbrains
+.idea/

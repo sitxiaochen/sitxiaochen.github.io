@@ -1,0 +1,38 @@
+{
+  "name": "sitxiaochen-blog",
+  "type": "module",
+  "version": "2.0.0",
+  "private": true,
+  "description": "sitxiaochen 个人博客 —— Astro 静态站点 + SQLite 构建期数据层",
+  "engines": {
+    "node": ">=22.23.4"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "npm run db:sync && astro build && npm run search:index",
+    "preview": "astro preview",
+    "astro": "astro",
+    "check": "astro check",
+    "db:sync": "node --experimental-strip-types scripts/sync-content.ts",
+    "db:push": "drizzle-kit push",
+    "search:index": "pagefind --site dist",
+    "new": "node --experimental-strip-types scripts/new-post.ts"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.4",
+    "@astrojs/rss": "^4.0.19",
+    "@astrojs/sitemap": "^3.7.4",
+    "@libsql/client": "^0.18.0",
+    "@tailwindcss/typography": "^0.5.16",
+    "@tailwindcss/vite": "^4.3.3",
+    "astro": "^7.4.2",
+    "drizzle-orm": "^0.45.4",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^5.9.2"
+  },
+  "devDependencies": {
+    "drizzle-kit": "^0.31.4",
+    "pagefind": "^1.5.2"
+  }
+}

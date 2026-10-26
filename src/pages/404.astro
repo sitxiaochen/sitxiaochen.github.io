@@ -1,0 +1,23 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="页面不存在" description="404" noindex={true}>
+  <section class="container-page flex min-h-[50vh] flex-col justify-center py-20">
+    <p class="meta">404</p>
+    <h1 class="mt-3 text-3xl font-semibold tracking-tight">页面不存在</h1>
+    <p class="mt-3 text-[var(--color-ink-soft)]">你访问的地址可能已经移动或被删除。</p>
+    <div class="mt-8 flex flex-wrap gap-3">
+      <a
+        href="/"
+        class="rounded-md border border-[var(--color-line-strong)] px-4 py-2 text-sm text-[var(--color-ink)] transition-colors hover:border-[var(--color-accent)]"
+        >返回首页</a
+      >
+      <a
+        href="/archives/"
+        class="rounded-md border border-[var(--color-line)] px-4 py-2 text-sm text-[var(--color-ink-soft)] transition-colors hover:border-[var(--color-line-strong)] hover:text-[var(--color-ink)]"
+        >浏览归档</a
+      >
+    </div>
+  </section>
+</BaseLayout>

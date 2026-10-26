@@ -1,0 +1,39 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { SITE } from '@/lib/site';
+---
+
+<BaseLayout title="关于" description="关于本站与作者">
+  <section class="container-page pt-14">
+    <h1 class="text-2xl font-semibold tracking-tight">关于</h1>
+
+    <div class="prose prose-blog mt-8 dark:prose-invert">
+      <p>
+        我是 <strong>{SITE.author}</strong>，这个站点用来存放平时的运维记录、工具折腾笔记和 AI 相关的实践文档。
+      </p>
+
+      <h2>技术栈</h2>
+      <ul>
+        <li><strong>Astro</strong> —— 静态站点生成，默认零 JS，按需加载交互</li>
+        <li><strong>TypeScript</strong> —— 内容 schema 与构建脚本全类型化</li>
+        <li><strong>Tailwind CSS</strong> —— 原子化样式，暗色优先的设计语言</li>
+        <li><strong>SQLite + Drizzle</strong> —— 构建期数据快照，汇总文章、标签与站内链接</li>
+        <li><strong>Pagefind</strong> —— 构建时生成静态全文索引，纯前端检索</li>
+        <li><strong>GitHub Pages + Actions</strong> —— 推送到 main 后自动构建发布</li>
+      </ul>
+
+      <h2>内容与版权</h2>
+      <p>
+        文章以 Markdown 维护，源码托管在
+        <a href="https://github.com/sitxiaochen/sitxiaochen.github.io" rel="noopener" target="_blank">GitHub</a>。
+        转载请注明出处。
+      </p>
+
+      <h2>联系</h2>
+      <p>
+        欢迎通过
+        <a href="https://github.com/sitxiaochen" rel="noopener" target="_blank">GitHub</a> 联系我。
+      </p>
+    </div>
+  </section>
+</BaseLayout>

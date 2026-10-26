@@ -1,0 +1,94 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="搜索" description="站内全文检索" noindex={true}>
+  <section class="container-page pt-14">
+    <h1 class="text-2xl font-semibold tracking-tight">搜索</h1>
+    <p class="meta mt-2">由 Pagefind 提供，索引在构建时生成，纯前端检索</p>
+
+    <div class="mt-8 max-w-xl">
+      <label for="search-input" class="sr-only">搜索关键词</label>
+      <input
+        id="search-input"
+        type="search"
+        placeholder="输入关键词，例如 Ventoy、卸载…"
+        autocomplete="off"
+        class="w-full rounded-md border border-[var(--color-line)] bg-[var(--color-surface)] px-4 py-2.5 text-sm text-[var(--color-ink)] placeholder:text-[var(--color-ink-faint)] focus:border-[var(--color-line-strong)] focus:outline-none"
+      />
+    </div>
+
+    <div id="search-results" class="mt-8 max-w-2xl" aria-live="polite"></div>
+  </section>
+</BaseLayout>
+
+<link rel="stylesheet" href="/pagefind/pagefind-ui.css" />
+
+<script>
+  // Pagefind 在构建后生成 /pagefind/pagefind.js，仅在产物中存在
+  type Result = {
+    url: string;
+    meta: { title?: string };
+    excerpt: string;
+  };
+
+  const input = document.getElementById('search-input') as HTMLInputElement | null;
+  const out = document.getElementById('search-results');
+
+  if (input && out) {
+    let pagefind: {
+      search: (q: string) => Promise<{ results: { data: () => Promise<Result> }[] }>;
+    } | null = null;
+
+    const load = async () => {
+      if (pagefind) return pagefind;
+      try {
+        const pfPath = '/pagefind/pagefind.js';
+        // 构建后才存在的模块：用变量路径避免 TS/打包器静态解析
+        const mod = await import(/* @vite-ignore */ pfPath);
+        await mod.options({ excerptLength: 30 });
+        pagefind = mod;
+      } catch {
+        out.innerHTML =
+          '<p class="meta">搜索索引尚未生成。本地请先执行 <code>npm run build</code>，或使用 <code>npm run preview</code> 预览。</p>';
+        return null;
+      }
+      return pagefind;
+    };
+
+    let timer: number | undefined;
+    input.addEventListener('input', () => {
+      clearTimeout(timer);
+      timer = window.setTimeout(async () => {
+        const q = input.value.trim();
+        out.innerHTML = '';
+        if (q.length < 2) return;
+
+        const pf = await load();
+        if (!pf) return;
+
+        const search = await pf.search(q);
+        const items = await Promise.all(search.results.slice(0, 20).map((r) => r.data()));
+
+        if (items.length === 0) {
+          out.innerHTML = '<p class="meta">没有匹配结果。</p>';
+          return;
+        }
+
+        out.innerHTML = items
+          .map(
+            (r) => `
+            <article class="border-t border-[var(--color-line)] py-4">
+              <a href="${r.url}" class="group block">
+                <h2 class="text-sm font-medium text-[var(--color-ink)] group-hover:text-[var(--color-accent)]">
+                  ${r.meta.title ?? r.url}
+                </h2>
+                <p class="mt-1 text-xs leading-relaxed text-[var(--color-ink-soft)]">${r.excerpt}</p>
+              </a>
+            </article>`,
+          )
+          .join('');
+      }, 220);
+    });
+  }
+</script>
