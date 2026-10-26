@@ -2,14 +2,34 @@ backend:
   name: github
   repo: sitxiaochen/sitxiaochen.github.io
   branch: main
-  # GitHub OAuth PKCE：无需 OAuth 代理服务器、无需数据库
-  base_url: https://sitxiaochen.github.io
-  auth_endpoint: auth
 
-# 本地开发时可直接编辑文件（npx @sveltia/cms 或 npm run dev 后访问 /admin/）
+# ---------------------------------------------------------------
+# 认证方式说明
+#
+# Sveltia CMS 的 GitHub PKCE 认证依赖 GitHub 侧支持，
+# 该能力 GitHub 原计划 2025 Q4 上线但目前搁置，
+# 因此使用「个人访问令牌（PAT）」登录：无需 OAuth App、无需代理服务器。
+#
+# 登录步骤：
+#   1. 打开 https://sitxiaochen.github.io/admin/
+#   2. 点 "Sign In with Token"
+#   3. 按提示在 GitHub 生成 token 并粘贴
+#
+# Token 权限要求（fine-grained token）：
+#   - Contents        : Read and write   （提交文章、上传图片）
+#   - Pull requests   : Read and write   （Editorial 工作流开 PR）
+#   - Metadata        : Read-only（自动附带）
+# 或使用 classic token，勾选 repo 作用域即可。
+#
+# 不要提交任何 token 到本仓库；token 只保存在浏览器 localStorage。
+# ---------------------------------------------------------------
+
+# 本地开发：npm run dev 后访问 /admin/ 可直接改写本地文件
 local_backend: false
 
+# 编辑工作流：保存先落到 PR，合并后才上线
 publish_mode: editorial_workflow
+
 media_folder: public/images/uploads
 public_folder: /images/uploads
 
