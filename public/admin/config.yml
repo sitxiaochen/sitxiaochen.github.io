@@ -74,10 +74,12 @@ collections:
       - { name: lang, label: 语言, widget: hidden, default: zh-CN }
       - { name: cover, label: 封面图, widget: image, required: false }
       # widget: markdown 即 Lexical 富文本编辑器，输出为 Markdown 源码。
-      # 注意：modes 取值必须是连字符形式 rich-text / raw，
-      # 写成 rich_text（下划线）会被忽略并退回纯文本模式。
+      # modes / buttons 必须在 schema 白名单内，写错会导致 CMS 报“配置中存在错误”：
+      #   modes   -> rich_text | raw
+      #   buttons -> bold/italic/strikethrough/code/link/heading-one..six/
+      #              quote/bulleted-list/numbered-list/align
       - name: body
         label: 正文
         widget: markdown
-        modes: [rich-text, raw]
-        buttons: [bold, italic, code, link, heading-two, heading-three, bulleted-list, numbered-list, quote, code-block, table, horizontal-rule]
+        modes: [rich_text, raw]
+        buttons: [bold, italic, strikethrough, code, link, heading-one, heading-two, heading-three, quote, bulleted-list, numbered-list]
