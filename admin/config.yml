@@ -73,9 +73,11 @@ collections:
       - { name: draft, label: 草稿, widget: boolean, default: false }
       - { name: lang, label: 语言, widget: hidden, default: zh-CN }
       - { name: cover, label: 封面图, widget: image, required: false }
-      # widget: markdown 已是 Lexical 富文本编辑器（输出为 Markdown 源码）。
-      # modes 显式声明两种模式：富文本编辑 + raw（源码）编辑，可随时切换。
+      # widget: markdown 即 Lexical 富文本编辑器，输出为 Markdown 源码。
+      # 注意：modes 取值必须是连字符形式 rich-text / raw，
+      # 写成 rich_text（下划线）会被忽略并退回纯文本模式。
       - name: body
         label: 正文
         widget: markdown
-        modes: [rich_text, raw]
+        modes: [rich-text, raw]
+        buttons: [bold, italic, code, link, heading-two, heading-three, bulleted-list, numbered-list, quote, code-block, table, horizontal-rule]
